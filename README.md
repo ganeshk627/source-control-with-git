@@ -305,3 +305,86 @@ git push --set-upstream origin main # might ask for username and password if not
 ```
 ![Git Push](./images/git-push.png)
 
+```bash
+# Checking status after push
+git status
+```
+![Git Status - after push](./images/git-status-after-push.png)
+
+## 3.3. Cloning, Fetching, Merging and Pulling
+### 3.3.1. Cloning
+`git clone` creates a copy of an existing remote repository, including all its files, branches, and commit history, into your local machine.
+```mermaid
+flowchart LR
+    subgraph Git Development Environment 
+    direction LR
+    A[MODIFIED <br> Working Tree] --add--> B[STAGED <br> Staging/Index Tree]
+    B --commit--> C[COMMITTED <br> Local Repository]
+    end
+
+    subgraph "Git Repository Manager <br> (Bitbucket, GitHub, GitLab) <br>"
+    C[COMMITTED <br> Local Repository] --push--> D[REMOTE <br> Remote Repository]
+    D --clone--> A
+    D --clone--> C
+    end
+```
+```bash
+# Cloning the repository
+git clone https://github.com/username/repo.git
+```
+### 3.3.2. Fetching
+```mermaid
+flowchart LR
+    subgraph Git Development Environment 
+    direction LR
+    A[MODIFIED <br> Working Tree] --add--> B[STAGED <br> Staging/Index Tree]
+    B --commit--> C[COMMITTED <br> Local Repository]
+    end
+
+    subgraph "Git Repository Manager <br> (Bitbucket, GitHub, GitLab) <br>"
+    C[COMMITTED <br> Local Repository] --push--> D[REMOTE <br> Remote Repository]
+    D --fetch--> C
+    end
+```
+1. **Download Updates:** `git fetch` retrieves new commits, branches, and tags from the remote repository. These updates are stored in your local repository’s remote-tracking branches (e.g., `origin/main`), allowing you to see what has changed on the remote side.
+
+2. **No Merge or Checkout:** Unlike `git pull`, `git fetch` does not merge the fetched changes into your current branch or update your working directory. It only updates the remote-tracking branches.
+
+3. **Safe Operation:** Since `git fetch` doesn’t modify your working directory, it’s a safe operation to run frequently. It allows you to check for changes without interfering with your current work.
+
+4. **Stay Informed:** Using `git fetch` regularly helps you stay informed about the state of the remote repository, making it easier to decide when to merge or rebase your changes.
+```bash
+# Fetching the changes from remote repository
+git fetch
+```
+> After running git fetch, you can inspect the changes using commands like git log or git diff to see what commits are new. To integrate these changes into your current branch, you would typically use commands like git merge or git pull.
+### 3.3.3. Merging
+```mermaid
+flowchart LR
+    subgraph Git Development Environment 
+    direction LR
+    A[MODIFIED <br> Working Tree] --add--> B[STAGED <br> Staging/Index Tree]
+    B --commit--> C[COMMITTED <br> Local Repository]
+    end
+
+    subgraph "Git Repository Manager <br> (Bitbucket, GitHub, GitLab) <br>"
+    C[COMMITTED <br> Local Repository] --push--> D[REMOTE <br> Remote Repository]
+    D --fetch--> C
+    C --merge--> A
+    end
+```
+
+
+
+
+
+
+
+
+
+## Ways to find out the brach name
+git log
+git status
+git branch -vv
+git branch
+git branch -a
