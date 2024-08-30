@@ -359,6 +359,15 @@ flowchart LR
 # Fetching the changes from remote repository
 git fetch
 ```
+![Git Fetch](./images/git-fetch.png)
+```bash
+# Pulling the changes from remote repository
+git pull
+```
+![Git Pull - after fetch](./images/git-pull-after-fetch.png)
+```bash
+
+
 > After running git fetch, you can inspect the changes using commands like git log or git diff to see what commits are new. To integrate these changes into your current branch, you would typically use commands like git merge or git pull.
 ### 3.3.3. Merging
 ```mermaid
