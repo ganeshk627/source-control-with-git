@@ -263,11 +263,45 @@ flowchart LR
 git commit -m "commit message"
 
 # Committing the changes without message (it will open default text editor)
-git commit
-
+git commit # type the commit message in the editor then close the editor
 ```
 
+![Git Commit - without message](./images/git-commit-without-message.png)
+
+![Git Commit - without message](./images/git-commit-done.png)
+
+```bash
+# Checking status after committing all the files
+git status
+```
+![Git Status - after commit](./images/git-status-after-commit.png)
 
 
+```bash
+# Log the commit history after commit
+git log
+```
+![Git Log - after commit](./images/git-log-after-commit.png)
 
+```mermaid
+flowchart LR
+    subgraph Git Development Environment 
+    direction LR
+    A[MODIFIED <br> Working Tree] --add--> B[STAGED <br> Staging/Index Tree]
+    B --commit--> C[COMMITTED <br> Local Repository]
+    end
+
+    subgraph "Git Repository Manager <br> (Bitbucket, GitHub, GitLab) <br>"
+    C[COMMITTED <br> Local Repository] --push--> D[REMOTE <br> Remote Repository]
+    end
+```
+
+```bash
+# Specifying the remote repository
+git remote add origin https://github.com/username/repo.git
+
+# Pushing the changes to remote repository
+git push --set-upstream origin main # might ask for username and password if not configured
+```
+![Git Push](./images/git-push.png)
 
