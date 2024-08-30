@@ -184,9 +184,11 @@ git config --global core.safecrlf warn
 git config core.editor "code --wait"
 ```
 
-> ```git init``` command creates a new empty Git repository in the current directory. It creates a .git hidden directory in the current directory and initializes it with a .gitignore file.
+> Note 1:- ```git init``` command creates a new empty Git repository in the current directory. It creates a .git hidden directory in the current directory and initializes it with a .gitignore file.
 
-> ```git config``` command will impact the file `.git/config` in the current directory.
+> Note 2:- To view .git folder in IntelliJ, go to Preferences (CMD+, in Mac and Alt+Ctrl+S in Windows/Linux) --> Editor --> File Types --> Ignore Files and Folders: --> then remove '.git' pattern from it
+
+> Note 3:- ```git config``` command will impact the file `.git/config` in the current directory.
 
 ### 3.1.2. Adding Files to Git
 
