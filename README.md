@@ -471,7 +471,54 @@ git reflog
 # 04. Advanced Git Concepts
 ## 4.1. Merging and Rebasing Branches
 ### 4.1.0. Creating Branches
+```mermaid
+graph RL
+    A[commit A<br>bby78a3]
+    B[commit B<br>zu2hr4a]
+    C[commit C<br>qw3v5o0]
+    D[commit D<br>lo2tu2m]
+    E((main <br> <small>default branch<small/>))
+    F((HEAD))
 
+    B -.-> A
+    C -.-> B
+    D -.-> C
+    E --> D
+    F -.-> E
+
+    style D fill:#ac2643,stroke:#d5e4f7,stroke-width:4px;
+    style C fill:#ac2643,stroke:#f3f3f3,stroke-width:1px;
+    style B fill:#ac2643,stroke:#f3f3f3,stroke-width:1px;
+    style A fill:#ac2643,stroke:#f3f3f3,stroke-width:1px;
+    style E fill:#3d85c6,stroke:#f3f3f3,stroke-width:1px;
+    style F fill:#00703c,stroke:#f3f3f3,stroke-width:4px;
+```
+
+```mermaid
+graph RL
+    A[commit A<br>bby78a3]
+    B[commit B<br>zu2hr4a]
+    C[commit C<br>qw3v5o0]
+    D[commit D<br>lo2tu2m]
+    E((main <br> <small>default branch<small/>))
+    F((HEAD))
+    G((new branch))
+
+    B -.-> A
+    C -.-> B
+    D -.-> C
+    E --> D
+    F -.-> G
+    G --> D
+
+    style D fill:#ac2643,stroke:#d5e4f7,stroke-width:4px;
+    style C fill:#ac2643,stroke:#f3f3f3,stroke-width:1px;
+    style B fill:#ac2643,stroke:#f3f3f3,stroke-width:1px;
+    style A fill:#ac2643,stroke:#f3f3f3,stroke-width:1px;
+    style E fill:#3d85c6,stroke:#f3f3f3,stroke-width:1px;
+    style G fill:#3d85c6,stroke:#f3f3f3,stroke-width:1px;
+    style F fill:#00703c,stroke:#f3f3f3,stroke-width:4px;
+```
 
 ```bash
 # Creating a new branch
@@ -493,6 +540,55 @@ git checkout -b <branch-name>
 git checkout -b branch-for-merge
 ```
 ![Git Create and Checkout Branch](./images/git-create-and-checkout-branch.png)
+
+
+
+```mermaid
+graph RL
+    A[commit A<br>bby78a3]
+    B[commit B<br>zu2hr4a]
+    C[commit C<br>qw3v5o0]
+    D[commit D<br>lo2tu2m]
+    E[commit E<br>lo2tu2m]
+    I((main <br> <small>default branch<small/>))
+    J((new branch))
+    H((HEAD))
+
+
+    B -.-> A
+    C -.-> B
+    D -.-> C
+    E --> D
+    I --> D
+    H -.-> J
+    J --> E
+
+    style H fill:#00703c,stroke:#f3f3f3,stroke-width:4px;
+    style E fill:#ac2643,stroke:#d5e4f7,stroke-width:4px;
+    style D fill:#ac2643,stroke:#d5e4f7,stroke-width:4px;
+    style C fill:#ac2643,stroke:#f3f3f3,stroke-width:1px;
+    style B fill:#ac2643,stroke:#f3f3f3,stroke-width:1px;
+    style A fill:#ac2643,stroke:#f3f3f3,stroke-width:1px;
+    style I fill:#3d85c6,stroke:#f3f3f3,stroke-width:1px;
+    style J fill:#3d85c6,stroke:#f3f3f3,stroke-width:1px;
+```
+
+```bash
+# Checking status after making changes in new branch working directory
+git status
+```
+![Git Status - after changes in new branch working directory](./images/git-status-after-changes-in-new-branch.png)
+
+```bash
+# Adding and commiting the changes in new branch working directory
+git add .
+git commit -m "Add changes in new branch"
+```
+
+```bash
+# Log the commit history
+git log
+```
 
 > We could see the branch HEAD under ```.git/HEAD```
 
