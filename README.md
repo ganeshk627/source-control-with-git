@@ -366,10 +366,15 @@ git pull
 ```
 ![Git Pull - after fetch](./images/git-pull-after-fetch.png)
 ```bash
-
+# Log the commit history after fetch
+git log
+```
+![Git Log - after fetch and pull](./images/git-log-after-fetch-pull.png)
 
 > After running git fetch, you can inspect the changes using commands like git log or git diff to see what commits are new. To integrate these changes into your current branch, you would typically use commands like git merge or git pull.
+
 ### 3.3.3. Merging
+Merging combines changes from different branches into a single branch, integrating the histories and content of both branches.
 ```mermaid
 flowchart LR
     subgraph Git Development Environment 
@@ -385,8 +390,41 @@ flowchart LR
     end
 ```
 
+```bash
+# shows all the differences between: working directory <-> staging/index area <-> local repo <-> remote repo
+git status
+```
+![Git Status - Before merge](./images/git-status-after-changes-in-other-branch.png)
+```bash
+# Log the commit history before merge
+git log
+```
+```bash
+# Merging the changes from remote repository
+git merge
+```
+![Git Merge](./images/git-merge.png)
 
 
+
+### 3.3.4. Pulling
+Pulling is used to update your current local branch with the latest changes from a remote repository. It automates the process of fetching the latest updates from the remote branch and merging them into your local branch in a single step.
+
+```mermaid
+flowchart LR
+    subgraph Git Development Environment 
+    direction LR
+    A[MODIFIED <br> Working Tree] --add--> B[STAGED <br> Staging/Index Tree]
+    B --commit--> C[COMMITTED <br> Local Repository]
+    end
+
+    subgraph "Git Repository Manager <br> (Bitbucket, GitHub, GitLab) <br>"
+    C[COMMITTED <br> Local Repository] --push--> D[REMOTE <br> Remote Repository]
+    D --fetch--> C
+    C --merge--> A
+    D --pull--> C
+    end
+```
 
 
 
