@@ -426,10 +426,111 @@ flowchart LR
     end
 ```
 
+### 3.3.5. Stashing
+Stashing is used to temporarily store changes in the working directory. It allows you to discard or keep changes in the working directory without losing them.
+
+```bash
+# Checking status after making changes in working directory
+git status
+```
+
+![Git Status - after changes in working directory](./images/git-status-after-changes-in-working-dir.png)
+
+```bash
+# Stashing the changes in working directory
+git stash
+```
+
+```bash
+# Checking status after stashing
+git stash list
+```
+
+```bash
+# Checking status after stashing
+git status
+```
+
+```bash
+# Applying changes from stash
+git stash apply
+
+# git stash pop # removes the changes from stash
+```
+
+```bash
+# Checking status after applying changes from stash
+git status
+```
+
+```bash
+# Shows all the commits in the order which we have referenced them
+git reflog
+```
+
+# 04. Advanced Git Concepts
+## 4.1. Merging and Rebasing Branches
+### 4.1.0. Creating Branches
+
+
+```bash
+# Creating a new branch
+git branch <branch-name>
+```
+
+```bash
+# Switching to a branch
+git checkout <branch-name>
+```
+
+```bash
+# Create and Switching to a new branch
+git checkout -b <branch-name>
+```
+
+```bash
+# Creating and Switching to a new branch from master
+git checkout -b branch-for-merge
+```
+![Git Create and Checkout Branch](./images/git-create-and-checkout-branch.png)
+
+> We could see the branch HEAD under ```.git/HEAD```
+
+## 4.2. Rewriing the History of a Branch
 
 
 
+# 05. 
 
+# 06.
+
+## Exploring ```.git``` folder
+```
+project-root/
+├── .git/
+│   ├── hooks/
+│   ├── info/
+│   ├── logs/
+│   ├── objects/
+│   ├── refs/
+│   │   └── heads/ ------------------------> contains the file of current branch which is currently pointed to
+│   │       └── main ----------------------> name of the current branch poninting to; contains the hash of recent commit of the current branch;
+│   │   └── remotes/ ----------------------> contains all the remote branches
+│   │       └── origin/ -------------------> contains the hash of recent commit of the remote branch
+│   │           ├── HEAD ------------------> contains current branch which pointing to
+│   │           └── main ------------------> name of the remote branch; contains the hash of recent commit of the remote branch;
+│   ├── COMMIT_EDITMSG
+│   ├── config
+│   ├── description
+│   ├── FETCH_HEAD ------------------------> used to keep track of whats fetched; contains the hash and branch details of the latest commit
+│   ├── HEAD ------------------------------> contains current branch which pointing to
+│   ├── index
+│   ├── ORIG_HEAD -------------------------> saves previous state of HEAD pointer;
+│   └── packed-refs
+├── .gitignore
+└── README.md
+
+```
 
 ## Ways to find out the brach name
 git log
