@@ -744,6 +744,10 @@ git log
 ```
 > We should be able to see the commit in ```new-branch-for-merge``` which happened in ```branch-for-merge``` after merge.
 
+### 4.1.2. Deleting Branches
+In Git, branches are used to isolate work on different features, bug fixes, or experiments. Once a branch has served its purpose—perhaps after it has been merged into the main branch—it can be deleted to keep the repository clean and manageable. Deleting a branch is a common practice to prevent clutter and to ensure that only active or relevant branches remain in the repository.
+
+
 ```mermaid
 graph RL
     A[commit A<br>bby78a3]
@@ -780,9 +784,6 @@ git branch -l -a
 ```
 ![Git List Branches before deleting a branch](./images/git-branch-la-before-delete-branchformerge.png)
 
-### 4.1.2. Deleting Branches
-In Git, branches are used to isolate work on different features, bug fixes, or experiments. Once a branch has served its purpose—perhaps after it has been merged into the main branch—it can be deleted to keep the repository clean and manageable. Deleting a branch is a common practice to prevent clutter and to ensure that only active or relevant branches remain in the repository.
-
 ```bash
 # Deleting the branch
 git branch -d branch-for-merge
@@ -805,7 +806,6 @@ graph RL
     I((main <br> <small>default branch<small/>))
     J((new-branch-for-merge))
     H((HEAD))
-    K((diverged-branch))
 
     B -.-> A
     C -.-> B
@@ -814,7 +814,6 @@ graph RL
     I --> D
     H -.-> J
     J --> E
-    K --> D
 
     style H fill:#00703c,stroke:#f3f3f3,stroke-width:4px;
     style E fill:#ac2643,stroke:#d5e4f7,stroke-width:4px;
@@ -824,7 +823,6 @@ graph RL
     style A fill:#ac2643,stroke:#f3f3f3,stroke-width:1px;
     style I fill:#3d85c6,stroke:#f3f3f3,stroke-width:1px;
     style J fill:#3d85c6,stroke:#f3f3f3,stroke-width:1px;
-    style K fill:#3d85c6,stroke:#f3f3f3,stroke-width:1px;
 ```
 
 ```mermaid
@@ -837,7 +835,6 @@ graph RL
     I((main <br> <small>default branch<small/>))
     J((new-branch-for-merge))
     H((HEAD))
-    K((diverged-branch))
 
     B -.-> A
     C -.-> B
@@ -846,7 +843,6 @@ graph RL
     I --> E
     H -.-> I
     J --> E
-    K --> D
 
     style H fill:#00703c,stroke:#f3f3f3,stroke-width:4px;
     style E fill:#ac2643,stroke:#d5e4f7,stroke-width:4px;
@@ -856,8 +852,10 @@ graph RL
     style A fill:#ac2643,stroke:#f3f3f3,stroke-width:1px;
     style I fill:#3d85c6,stroke:#f3f3f3,stroke-width:1px;
     style J fill:#3d85c6,stroke:#f3f3f3,stroke-width:1px;
-    style K fill:#3d85c6,stroke:#f3f3f3,stroke-width:1px;
 ```
+
+### 4.1.3. Diverging Branches
+Diverging in Git refers to a situation where two branches have a common ancestor but have developed independently since then. This means that the branches have commits that are not shared with each other, leading to a divergence in their histories.
 
 ```bash
 # Merging the branch "new-branch-for-merge" to "main"
@@ -925,7 +923,7 @@ graph RL
     J((new-branch-for-merge))
     H((HEAD))
     K((diverged-branch))
-    L((new-test-branch))
+    L((new-test-class))
 
     B -.-> A
     C -.-> B
@@ -956,17 +954,17 @@ graph RL
 ```bash
 # Creating one more branch and Switching to a new branch from master
 git checkout main
-git checkout -b new-test-branch
+git checkout -b new-test-class
 git branch -l -a
 # Adding and commiting the changes in new branch working directory
 git add .
-git commit -m "Commit from new test branch"
+git commit -m "Commit from new test class"
 git log
 # Merge the changes from diverged-branch to new-test-class
 git merge diverged-branch
 ```
 
-### 4.1.3. Rebasing Branches
+### 4.1.4. Rebasing Branches
 Rebasing is a Git operation that allows you to integrate changes from one branch into another by moving or "replaying" commits from one branch onto another. Unlike git merge, which creates a new commit to join two branches together, git rebase applies each commit from the current branch onto the target branch one by one, resulting in a linear history without merge commits.
 
 
