@@ -502,7 +502,7 @@ graph RL
     D[commit D<br>lo2tu2m]
     E((main <br> <small>default branch<small/>))
     F((HEAD))
-    G((new branch))
+    G((branch-for-merge))
 
     B -.-> A
     C -.-> B
@@ -549,9 +549,9 @@ graph RL
     B[commit B<br>zu2hr4a]
     C[commit C<br>qw3v5o0]
     D[commit D<br>lo2tu2m]
-    E[commit E<br>lo2tu2m]
+    E[commit E<br>9mqe56z]
     I((main <br> <small>default branch<small/>))
-    J((new branch))
+    J((branch-for-merge))
     H((HEAD))
 
 
@@ -590,7 +590,221 @@ git commit -m "Add changes in new branch"
 git log
 ```
 
-> We could see the branch HEAD under ```.git/HEAD```
+```mermaid
+graph RL
+    A[commit A<br>bby78a3]
+    B[commit B<br>zu2hr4a]
+    C[commit C<br>qw3v5o0]
+    D[commit D<br>lo2tu2m]
+    E[commit E<br>9mqe56z]
+    I((main <br> <small>default branch<small/>))
+    J((branch-for-merge))
+    K((new-branch-for-merge))
+    H((HEAD))
+
+    B -.-> A
+    C -.-> B
+    D -.-> C
+    E --> D
+    I --> D
+    H -.-> K
+    J --> E
+    K --> D
+
+
+    style H fill:#00703c,stroke:#f3f3f3,stroke-width:4px;
+    style E fill:#ac2643,stroke:#d5e4f7,stroke-width:4px;
+    style D fill:#ac2643,stroke:#d5e4f7,stroke-width:4px;
+    style C fill:#ac2643,stroke:#f3f3f3,stroke-width:1px;
+    style B fill:#ac2643,stroke:#f3f3f3,stroke-width:1px;
+    style A fill:#ac2643,stroke:#f3f3f3,stroke-width:1px;
+    style I fill:#3d85c6,stroke:#f3f3f3,stroke-width:1px;
+    style J fill:#3d85c6,stroke:#f3f3f3,stroke-width:1px;
+    style K fill:#3d85c6,stroke:#f3f3f3,stroke-width:1px;
+```
+
+
+
+### 4.1.1. Merging Branches
+```mermaid
+graph RL
+    A[commit A<br>bby78a3]
+    B[commit B<br>zu2hr4a]
+    C[commit C<br>qw3v5o0]
+    D[commit D<br>lo2tu2m]
+    E[commit E<br>9mqe56z]
+    I((main <br> <small>default branch<small/>))
+    J((branch-for-merge))
+    H((HEAD))
+    K((new-branch-for-merge))
+
+    B -.-> A
+    C -.-> B
+    D -.-> C
+    E --> D
+    I --> D
+    H -.-> J
+    J --> E
+    K--> D
+
+    style H fill:#00703c,stroke:#f3f3f3,stroke-width:4px;
+    style E fill:#ac2643,stroke:#d5e4f7,stroke-width:4px;
+    style D fill:#ac2643,stroke:#d5e4f7,stroke-width:4px;
+    style C fill:#ac2643,stroke:#f3f3f3,stroke-width:1px;
+    style B fill:#ac2643,stroke:#f3f3f3,stroke-width:1px;
+    style A fill:#ac2643,stroke:#f3f3f3,stroke-width:1px;
+    style I fill:#3d85c6,stroke:#f3f3f3,stroke-width:1px;
+    style J fill:#3d85c6,stroke:#f3f3f3,stroke-width:1px;
+    style K fill:#3d85c6,stroke:#f3f3f3,stroke-width:1px;
+```
+
+```bash
+# Creating one more branch and Switching to a new branch from master
+git checkout main
+git checkout -b new-branch-for-merge
+git branch -l -a
+```
+
+```mermaid
+graph RL
+    A[commit A<br>bby78a3]
+    B[commit B<br>zu2hr4a]
+    C[commit C<br>qw3v5o0]
+    D[commit D<br>lo2tu2m]
+    E[commit E<br>9mqe56z]
+    I((main <br> <small>default branch<small/>))
+    J((branch-for-merge))
+    K((new-branch-for-merge))
+    H((HEAD))
+    HO((HEAD))
+
+    B -.-> A
+    C -.-> B
+    D -.-> C
+    E --> D
+    I --> D
+    H -.-> K
+    J --> E
+    K --> E
+    HO -.-> J
+    HO --"fast-forward"--> H
+
+    style H fill:#00703c,stroke:#f3f3f3,stroke-width:4px;
+    style E fill:#ac2643,stroke:#d5e4f7,stroke-width:4px;
+    style D fill:#ac2643,stroke:#d5e4f7,stroke-width:4px;
+    style C fill:#ac2643,stroke:#f3f3f3,stroke-width:1px;
+    style B fill:#ac2643,stroke:#f3f3f3,stroke-width:1px;
+    style A fill:#ac2643,stroke:#f3f3f3,stroke-width:1px;
+    style I fill:#3d85c6,stroke:#f3f3f3,stroke-width:1px;
+    style J fill:#3d85c6,stroke:#f3f3f3,stroke-width:1px;
+    style K fill:#3d85c6,stroke:#f3f3f3,stroke-width:1px;
+```
+
+```mermaid
+graph RL
+    A[commit A<br>bby78a3]
+    B[commit B<br>zu2hr4a]
+    C[commit C<br>qw3v5o0]
+    D[commit D<br>lo2tu2m]
+    E[commit E<br>9mqe56z]
+    I((main <br> <small>default branch<small/>))
+    J((branch-for-merge))
+    K((new-branch-for-merge))
+    H((HEAD))
+
+    B -.-> A
+    C -.-> B
+    D -.-> C
+    E --> D
+    I --> D
+    H -.-> K
+    J --> E
+    K --> E
+
+    style H fill:#00703c,stroke:#f3f3f3,stroke-width:4px;
+    style E fill:#ac2643,stroke:#d5e4f7,stroke-width:4px;
+    style D fill:#ac2643,stroke:#d5e4f7,stroke-width:4px;
+    style C fill:#ac2643,stroke:#f3f3f3,stroke-width:1px;
+    style B fill:#ac2643,stroke:#f3f3f3,stroke-width:1px;
+    style A fill:#ac2643,stroke:#f3f3f3,stroke-width:1px;
+    style I fill:#3d85c6,stroke:#f3f3f3,stroke-width:1px;
+    style J fill:#3d85c6,stroke:#f3f3f3,stroke-width:1px;
+    style K fill:#3d85c6,stroke:#f3f3f3,stroke-width:1px;
+```
+
+
+```bash
+# Merge the changes from branch-for-merge to new-branch-for-merge
+git merge branch-for-merge
+```
+![Git Merge - branch-for-merge to new-branch-for-merge](./images/git-merge-branch-to-new-branch.png)
+
+```bash
+# Log the commit history
+git log
+```
+> We should be able to see the commit in ```new-branch-for-merge``` which happened in ```branch-for-merge``` after merge.
+
+```mermaid
+graph RL
+    A[commit A<br>bby78a3]
+    B[commit B<br>zu2hr4a]
+    C[commit C<br>qw3v5o0]
+    D[commit D<br>lo2tu2m]
+    E[commit E<br>9mqe56z]
+    I((main <br> <small>default branch<small/>))
+    K((new-branch-for-merge))
+    H((HEAD))
+    J((branch-for-merge<br>deleted branch))
+
+    B -.-> A
+    C -.-> B
+    D -.-> C
+    E --> D
+    I --> D
+    H -.-> K
+    K --> E
+
+    style H fill:#00703c,stroke:#f3f3f3,stroke-width:4px;
+    style E fill:#ac2643,stroke:#d5e4f7,stroke-width:4px;
+    style D fill:#ac2643,stroke:#d5e4f7,stroke-width:4px;
+    style C fill:#ac2643,stroke:#f3f3f3,stroke-width:1px;
+    style B fill:#ac2643,stroke:#f3f3f3,stroke-width:1px;
+    style A fill:#ac2643,stroke:#f3f3f3,stroke-width:1px;
+    style I fill:#3d85c6,stroke:#f3f3f3,stroke-width:1px;
+    style J fill:#ff0000,stroke:#f3f3f3,stroke-width:1px;
+    style K fill:#3d85c6,stroke:#f3f3f3,stroke-width:1px;
+```
+```bash
+# Listing the branches before deleting a branch
+git branch -l -a
+```
+![Git List Branches before deleting a branch](./images/git-branch-la-before-delete-branchformerge.png)
+
+```bash
+# Deleting the branch
+git branch -d branch-for-merge
+```
+![Git Delete Branch](./images/git-branch-d.png)
+
+```bash
+# Listing the branches after deleting a branch
+git branch -l -a
+```
+![Git List Branches after deleting a branch](./images/git-branch-la-after-deleting-branch.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## 4.2. Rewriing the History of a Branch
 
