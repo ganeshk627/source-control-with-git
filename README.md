@@ -793,20 +793,99 @@ git branch -l -a
 ```
 ![Git List Branches after deleting a branch](./images/git-branch-la-after-deleting-branch.png)
 
+```mermaid
+graph RL
+    A[commit A<br>bby78a3]
+    B[commit B<br>zu2hr4a]
+    C[commit C<br>qw3v5o0]
+    D[commit D<br>lo2tu2m]
+    E[commit E<br>9mqe56z]
+    I((main <br> <small>default branch<small/>))
+    J((new-branch-for-merge))
+    H((HEAD))
+    K((diverged-branch))
+
+    B -.-> A
+    C -.-> B
+    D -.-> C
+    E --> D
+    I --> D
+    H -.-> J
+    J --> E
+    K --> D
+
+    style H fill:#00703c,stroke:#f3f3f3,stroke-width:4px;
+    style E fill:#ac2643,stroke:#d5e4f7,stroke-width:4px;
+    style D fill:#ac2643,stroke:#d5e4f7,stroke-width:4px;
+    style C fill:#ac2643,stroke:#f3f3f3,stroke-width:1px;
+    style B fill:#ac2643,stroke:#f3f3f3,stroke-width:1px;
+    style A fill:#ac2643,stroke:#f3f3f3,stroke-width:1px;
+    style I fill:#3d85c6,stroke:#f3f3f3,stroke-width:1px;
+    style J fill:#3d85c6,stroke:#f3f3f3,stroke-width:1px;
+    style K fill:#3d85c6,stroke:#f3f3f3,stroke-width:1px;
+```
+
+```mermaid
+graph RL
+    A[commit A<br>bby78a3]
+    B[commit B<br>zu2hr4a]
+    C[commit C<br>qw3v5o0]
+    D[commit D<br>lo2tu2m]
+    E[commit E<br>9mqe56z]
+    F[commit F<br>9mqe56z]
+    I((main <br> <small>default branch<small/>))
+    J((new-branch-for-merge))
+    H((HEAD))
+    K((diverged-branch))
+
+    B -.-> A
+    C -.-> B
+    D -.-> C
+    E --> D
+    I --> D
+    H -.-> J
+    J --> E
+    F --> D
+    K --> F
 
 
+    style H fill:#00703c,stroke:#f3f3f3,stroke-width:4px;
+    style F fill:#ac2643,stroke:#d5e4f7,stroke-width:4px;
+    style E fill:#ac2643,stroke:#d5e4f7,stroke-width:4px;
+    style D fill:#ac2643,stroke:#d5e4f7,stroke-width:4px;
+    style C fill:#ac2643,stroke:#f3f3f3,stroke-width:1px;
+    style B fill:#ac2643,stroke:#f3f3f3,stroke-width:1px;
+    style A fill:#ac2643,stroke:#f3f3f3,stroke-width:1px;
+    style I fill:#3d85c6,stroke:#f3f3f3,stroke-width:1px;
+    style J fill:#3d85c6,stroke:#f3f3f3,stroke-width:1px;
+    style K fill:#3d85c6,stroke:#f3f3f3,stroke-width:1px;
+```
 
 
+```bash
+# Creating a diverged branch
+git checkout main
+git checkout -b diverged-branch
+git branch -l -a
+# Adding and commiting the changes in new branch working directory
+git add .
+git commit -m "Commit from dieverged branch"
+```
 
+```bash
+# Creating one more branch and Switching to a new branch from master
+git checkout main
+git checkout -b new-test-class
+git branch -l -a
+# Adding and commiting the changes in new branch working directory
+git add .
+git commit -m "Commit from new test class"
+git log
+# Merge the changes from diverged-branch to new-test-class
+git merge diverged-branch
+```
 
-
-
-
-
-
-
-
-## 4.2. Rewriing the History of a Branch
+## 4.2. Rewritng the History of a Branch
 
 
 
