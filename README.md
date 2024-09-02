@@ -623,9 +623,9 @@ graph RL
     style K fill:#3d85c6,stroke:#f3f3f3,stroke-width:1px;
 ```
 
-
-
 ### 4.1.1. Merging Branches
+Merging in Git is the process of combining the changes from two branches into a single branch. It integrates the changes from one branch (often a feature branch) into another branch (typically the main or master branch). Unlike rebasing, which rewrites the commit history, merging preserves the commit history of both branches, including the point where the two branches diverge and the point where they come back together.
+
 ```mermaid
 graph RL
     A[commit A<br>bby78a3]
@@ -732,7 +732,6 @@ graph RL
     style K fill:#3d85c6,stroke:#f3f3f3,stroke-width:1px;
 ```
 
-
 ```bash
 # Merge the changes from branch-for-merge to new-branch-for-merge
 git merge branch-for-merge
@@ -780,6 +779,9 @@ graph RL
 git branch -l -a
 ```
 ![Git List Branches before deleting a branch](./images/git-branch-la-before-delete-branchformerge.png)
+
+### 4.1.2. Deleting Branches
+In Git, branches are used to isolate work on different features, bug fixes, or experiments. Once a branch has served its purpose—perhaps after it has been merged into the main branch—it can be deleted to keep the repository clean and manageable. Deleting a branch is a common practice to prevent clutter and to ensure that only active or relevant branches remain in the repository.
 
 ```bash
 # Deleting the branch
@@ -832,6 +834,44 @@ graph RL
     C[commit C<br>qw3v5o0]
     D[commit D<br>lo2tu2m]
     E[commit E<br>9mqe56z]
+    I((main <br> <small>default branch<small/>))
+    J((new-branch-for-merge))
+    H((HEAD))
+    K((diverged-branch))
+
+    B -.-> A
+    C -.-> B
+    D -.-> C
+    E --> D
+    I --> E
+    H -.-> I
+    J --> E
+    K --> D
+
+    style H fill:#00703c,stroke:#f3f3f3,stroke-width:4px;
+    style E fill:#ac2643,stroke:#d5e4f7,stroke-width:4px;
+    style D fill:#ac2643,stroke:#d5e4f7,stroke-width:4px;
+    style C fill:#ac2643,stroke:#f3f3f3,stroke-width:1px;
+    style B fill:#ac2643,stroke:#f3f3f3,stroke-width:1px;
+    style A fill:#ac2643,stroke:#f3f3f3,stroke-width:1px;
+    style I fill:#3d85c6,stroke:#f3f3f3,stroke-width:1px;
+    style J fill:#3d85c6,stroke:#f3f3f3,stroke-width:1px;
+    style K fill:#3d85c6,stroke:#f3f3f3,stroke-width:1px;
+```
+
+```bash
+# Merging the branch "new-branch-for-merge" to "main"
+git checkout main
+git merge new-branch-for-merge
+```
+
+```mermaid
+graph RL
+    A[commit A<br>bby78a3]
+    B[commit B<br>zu2hr4a]
+    C[commit C<br>qw3v5o0]
+    D[commit D<br>lo2tu2m]
+    E[commit E<br>9mqe56z]
     F[commit F<br>9mqe56z]
     I((main <br> <small>default branch<small/>))
     J((new-branch-for-merge))
@@ -842,10 +882,10 @@ graph RL
     C -.-> B
     D -.-> C
     E --> D
-    I --> D
-    H -.-> J
+    I --> E
+    H -.-> K
     J --> E
-    F --> D
+    F --> E
     K --> F
 
 
@@ -872,6 +912,47 @@ git add .
 git commit -m "Commit from dieverged branch"
 ```
 
+```mermaid
+graph RL
+    A[commit A<br>bby78a3]
+    B[commit B<br>zu2hr4a]
+    C[commit C<br>qw3v5o0]
+    D[commit D<br>lo2tu2m]
+    E[commit E<br>9mqe56z]
+    F[commit F<br>9mqe56z]
+    G[commit G<br>9mqe56z]
+    I((main <br> <small>default branch<small/>))
+    J((new-branch-for-merge))
+    H((HEAD))
+    K((diverged-branch))
+    L((new-test-class))
+
+    B -.-> A
+    C -.-> B
+    D -.-> C
+    E --> D
+    I --> E
+    H -.-> L
+    J --> E
+    F --> E
+    K --> F
+    G --> E
+    L --> G
+
+    style H fill:#00703c,stroke:#f3f3f3,stroke-width:4px;
+    style G fill:#ac2643,stroke:#d5e4f7,stroke-width:4px;
+    style F fill:#ac2643,stroke:#d5e4f7,stroke-width:4px;
+    style E fill:#ac2643,stroke:#d5e4f7,stroke-width:4px;
+    style D fill:#ac2643,stroke:#d5e4f7,stroke-width:4px;
+    style C fill:#ac2643,stroke:#f3f3f3,stroke-width:1px;
+    style B fill:#ac2643,stroke:#f3f3f3,stroke-width:1px;
+    style A fill:#ac2643,stroke:#f3f3f3,stroke-width:1px;
+    style I fill:#3d85c6,stroke:#f3f3f3,stroke-width:1px;
+    style J fill:#3d85c6,stroke:#f3f3f3,stroke-width:1px;
+    style K fill:#3d85c6,stroke:#f3f3f3,stroke-width:1px;
+    style L fill:#3d85c6,stroke:#f3f3f3,stroke-width:1px;
+```
+
 ```bash
 # Creating one more branch and Switching to a new branch from master
 git checkout main
@@ -884,6 +965,17 @@ git log
 # Merge the changes from diverged-branch to new-test-class
 git merge diverged-branch
 ```
+
+### 4.1.3. Rebasing Branches
+Rebasing is a Git operation that allows you to integrate changes from one branch into another by moving or "replaying" commits from one branch onto another. Unlike git merge, which creates a new commit to join two branches together, git rebase applies each commit from the current branch onto the target branch one by one, resulting in a linear history without merge commits.
+
+
+
+
+
+
+
+
 
 ## 4.2. Rewritng the History of a Branch
 
