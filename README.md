@@ -925,7 +925,7 @@ graph RL
     J((new-branch-for-merge))
     H((HEAD))
     K((diverged-branch))
-    L((new-test-class))
+    L((new-test-branch))
 
     B -.-> A
     C -.-> B
@@ -956,11 +956,11 @@ graph RL
 ```bash
 # Creating one more branch and Switching to a new branch from master
 git checkout main
-git checkout -b new-test-class
+git checkout -b new-test-branch
 git branch -l -a
 # Adding and commiting the changes in new branch working directory
 git add .
-git commit -m "Commit from new test class"
+git commit -m "Commit from new test branch"
 git log
 # Merge the changes from diverged-branch to new-test-class
 git merge diverged-branch
