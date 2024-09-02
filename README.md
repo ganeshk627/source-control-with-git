@@ -558,7 +558,7 @@ graph RL
     B -.-> A
     C -.-> B
     D -.-> C
-    E --> D
+    E -.-> D
     I --> D
     H -.-> J
     J --> E
@@ -605,7 +605,7 @@ graph RL
     B -.-> A
     C -.-> B
     D -.-> C
-    E --> D
+    E -.-> D
     I --> D
     H -.-> K
     J --> E
@@ -641,7 +641,7 @@ graph RL
     B -.-> A
     C -.-> B
     D -.-> C
-    E --> D
+    E -.-> D
     I --> D
     H -.-> J
     J --> E
@@ -681,7 +681,7 @@ graph RL
     B -.-> A
     C -.-> B
     D -.-> C
-    E --> D
+    E -.-> D
     I --> D
     H -.-> K
     J --> E
@@ -715,7 +715,7 @@ graph RL
     B -.-> A
     C -.-> B
     D -.-> C
-    E --> D
+    E -.-> D
     I --> D
     H -.-> K
     J --> E
@@ -759,7 +759,7 @@ graph RL
     B -.-> A
     C -.-> B
     D -.-> C
-    E --> D
+    E -.-> D
     I --> D
     H -.-> K
     K --> E
@@ -810,7 +810,7 @@ graph RL
     B -.-> A
     C -.-> B
     D -.-> C
-    E --> D
+    E -.-> D
     I --> D
     H -.-> J
     J --> E
@@ -842,7 +842,7 @@ graph RL
     B -.-> A
     C -.-> B
     D -.-> C
-    E --> D
+    E -.-> D
     I --> E
     H -.-> I
     J --> E
@@ -881,11 +881,11 @@ graph RL
     B -.-> A
     C -.-> B
     D -.-> C
-    E --> D
+    E -.-> D
     I --> E
     H -.-> K
     J --> E
-    F --> E
+    F -.-> E
     K --> F
 
 
@@ -934,9 +934,9 @@ graph RL
     I --> E
     H -.-> L
     J --> E
-    F --> E
+    F -.-> E
     K --> F
-    G --> E
+    G -.-> E
     L --> G
 
     style H fill:#00703c,stroke:#f3f3f3,stroke-width:4px;
