@@ -744,6 +744,12 @@ git log
 ```
 > We should be able to see the commit in ```new-branch-for-merge``` which happened in ```branch-for-merge``` after merge.
 
+```bash
+# Merging the branch "new-branch-for-merge" to "main"
+git checkout main
+git merge new-branch-for-merge
+```
+
 ### 4.1.2. Deleting Branches
 In Git, branches are used to isolate work on different features, bug fixes, or experiments. Once a branch has served its purpose—perhaps after it has been merged into the main branch—it can be deleted to keep the repository clean and manageable. Deleting a branch is a common practice to prevent clutter and to ensure that only active or relevant branches remain in the repository.
 
@@ -775,7 +781,7 @@ graph RL
     style B fill:#ac2643,stroke:#f3f3f3,stroke-width:1px;
     style A fill:#ac2643,stroke:#f3f3f3,stroke-width:1px;
     style I fill:#3d85c6,stroke:#f3f3f3,stroke-width:1px;
-    style J fill:#ff0000,stroke:#f3f3f3,stroke-width:1px;
+    style J fill:#ff0000,stroke:#f3f3f3,stroke-width:4px;
     style K fill:#3d85c6,stroke:#f3f3f3,stroke-width:1px;
 ```
 ```bash
@@ -856,12 +862,6 @@ graph RL
 
 ### 4.1.3. Diverging Branches
 Diverging in Git refers to a situation where two branches have a common ancestor but have developed independently since then. This means that the branches have commits that are not shared with each other, leading to a divergence in their histories.
-
-```bash
-# Merging the branch "new-branch-for-merge" to "main"
-git checkout main
-git merge new-branch-for-merge
-```
 
 ```mermaid
 graph RL
@@ -951,14 +951,55 @@ graph RL
     style L fill:#3d85c6,stroke:#f3f3f3,stroke-width:1px;
 ```
 
+```mermaid
+graph RL
+    A[commit A<br>bby78a3]
+    B[commit B<br>zu2hr4a]
+    C[commit C<br>qw3v5o0]
+    D[commit D<br>lo2tu2m]
+    E[commit E<br>9mqe56z]
+    F[commit F<br>9mqe56z]
+    G[commit G<br>9mqe56z]
+    I((main <br> <small>default branch<small/>))
+    J((new-branch-for-merge))
+    H((HEAD))
+    K((diverged-branch))
+    L((new-test-class))
+
+    B -.-> A
+    C -.-> B
+    D -.-> C
+    E --> D
+    I --> E
+    H -.-> L
+    J --> E
+    F -.-> E
+    K --> F
+    G -.-> F
+    L --> G
+
+    style H fill:#00703c,stroke:#f3f3f3,stroke-width:4px;
+    style G fill:#ac2643,stroke:#d5e4f7,stroke-width:4px;
+    style F fill:#ac2643,stroke:#d5e4f7,stroke-width:4px;
+    style E fill:#ac2643,stroke:#d5e4f7,stroke-width:4px;
+    style D fill:#ac2643,stroke:#d5e4f7,stroke-width:4px;
+    style C fill:#ac2643,stroke:#f3f3f3,stroke-width:1px;
+    style B fill:#ac2643,stroke:#f3f3f3,stroke-width:1px;
+    style A fill:#ac2643,stroke:#f3f3f3,stroke-width:1px;
+    style I fill:#3d85c6,stroke:#f3f3f3,stroke-width:1px;
+    style J fill:#3d85c6,stroke:#f3f3f3,stroke-width:1px;
+    style K fill:#3d85c6,stroke:#f3f3f3,stroke-width:1px;
+    style L fill:#3d85c6,stroke:#f3f3f3,stroke-width:1px;
+```
+
 ```bash
 # Creating one more branch and Switching to a new branch from master
 git checkout main
-git checkout -b new-test-class
+git checkout -b new-test-branch
 git branch -l -a
 # Adding and commiting the changes in new branch working directory
 git add .
-git commit -m "Commit from new test class"
+git commit -m "Commit from new test branch"
 git log
 # Merge the changes from diverged-branch to new-test-class
 git merge diverged-branch
@@ -967,15 +1008,204 @@ git merge diverged-branch
 ### 4.1.4. Rebasing Branches
 Rebasing is a Git operation that allows you to integrate changes from one branch into another by moving or "replaying" commits from one branch onto another. Unlike git merge, which creates a new commit to join two branches together, git rebase applies each commit from the current branch onto the target branch one by one, resulting in a linear history without merge commits.
 
+```mermaid
+graph RL
+    A[commit A<br>bby78a3]
+    B[commit B<br>zu2hr4a]
+    C[commit C<br>qw3v5o0]
+    D[commit D<br>lo2tu2m]
+    E[commit E<br>9mqe56z]
+    G[commit G<br>9mqe56z]
+    I((main <br> <small>default branch<small/>))
+    H((HEAD))
+    L((new-test-branch))
+
+    B -.-> A
+    C -.-> B
+    D -.-> C
+    E --> D
+    I --> E
+    H -.-> L
+    G -.-> D
+    L --> G
 
 
+    style H fill:#00703c,stroke:#f3f3f3,stroke-width:4px;
+    style G fill:#ac2643,stroke:#d5e4f7,stroke-width:4px;
+    style E fill:#ac2643,stroke:#d5e4f7,stroke-width:4px;
+    style D fill:#ac2643,stroke:#d5e4f7,stroke-width:4px;
+    style C fill:#ac2643,stroke:#f3f3f3,stroke-width:1px;
+    style B fill:#ac2643,stroke:#f3f3f3,stroke-width:1px;
+    style A fill:#ac2643,stroke:#f3f3f3,stroke-width:1px;
+    style I fill:#3d85c6,stroke:#f3f3f3,stroke-width:1px;
+    style L fill:#3d85c6,stroke:#f3f3f3,stroke-width:1px;
+```
 
+```mermaid
+graph RL
+    A[commit A<br>bby78a3]
+    B[commit B<br>zu2hr4a]
+    C[commit C<br>qw3v5o0]
+    D[commit D<br>lo2tu2m]
+    E[commit E<br>9mqe56z]
+    G[commit G<br>9mqe56z]
+    I((main <br> <small>default branch<small/>))
+    H((HEAD))
+    L((new-test-branch))
+    G'[commit G'<br>9mqe56z]
 
+    B -.-> A
+    C -.-> B
+    D -.-> C
+    E --> D
+    I --> E
+    H -.-> L
+   
+    G -.-> D
+    L --> G'
+    G' -.-> E
 
+    style H fill:#00703c,stroke:#f3f3f3,stroke-width:4px;
+    style G' fill:#ac2643,stroke:#d5e4f7,stroke-width:4px;
+    style G fill:#ac2643,stroke:#d5e4f7,stroke-width:4px;
+    style E fill:#ac2643,stroke:#d5e4f7,stroke-width:4px;
+    style D fill:#ac2643,stroke:#d5e4f7,stroke-width:4px;
+    style C fill:#ac2643,stroke:#f3f3f3,stroke-width:1px;
+    style B fill:#ac2643,stroke:#f3f3f3,stroke-width:1px;
+    style A fill:#ac2643,stroke:#f3f3f3,stroke-width:1px;
+    style I fill:#3d85c6,stroke:#f3f3f3,stroke-width:1px;
+    style L fill:#3d85c6,stroke:#f3f3f3,stroke-width:1px;
+```
+
+```bash
+# Rebasing main branch with new-test-branch
+git checkout new-test-branch
+git rebase main
+git push origin # might throw error
+git push --set-upstream origin new-test-branch
+```
+
+### 4.1.5. Pull Request
+1. Do Pull Request on a Remote Branch new-test-branch to main branch on GitHub.
+
+![Image]()
+
+2. Select Rebase and Merge and confirm. all the new-test-branch changes will be merged into main.
+
+![Image]()
+
+3. Get pull from the main branch to working directory.
+
+![Image]()
 
 
 
 ## 4.2. Rewritng the History of a Branch
+### 4.2.1. Amending
+Amending in Git refers to the process of modifying the most recent commit. This is useful when you want to make changes to the last commit, such as fixing a mistake, adding forgotten files, or updating the commit message, without creating an entirely new commit.
+
+> Amending in ```main``` or ```master``` branch is not advisible since many people are working on the same branch.
+
+```mermaid
+graph RL
+    A[commit A<br>bby78a3]
+    B[commit B<br>zu2hr4a]
+    C[commit C<br>qw3v5o0]
+    D[commit D<br>lo2tu2m]
+    E[commit E<br>9mqe56z]
+    G[commit G<br>9mqe56z]
+    I((main <br> <small>default branch<small/>))
+    H((HEAD))
+    L((new-test-branch))
+    G1[/index.html<br><small>part-of-commit<small/>/]
+    G2[/index.css<br><small>not-part-of-commit<small/>/]
+
+    B -.-> A
+    C -.-> B
+    D -.-> C
+    E --> D
+    I --> E
+    H -.-> L
+    L --> G
+    G -.-> E
+
+    subgraph Commit G
+    G1 <-.-> G
+    end
+    G2 -.- G
+
+    style H fill:#00703c,stroke:#f3f3f3,stroke-width:4px;
+    style G fill:#ac2643,stroke:#d5e4f7,stroke-width:4px;
+    style E fill:#ac2643,stroke:#d5e4f7,stroke-width:4px;
+    style D fill:#ac2643,stroke:#d5e4f7,stroke-width:4px;
+    style C fill:#ac2643,stroke:#f3f3f3,stroke-width:1px;
+    style B fill:#ac2643,stroke:#f3f3f3,stroke-width:1px;
+    style A fill:#ac2643,stroke:#f3f3f3,stroke-width:1px;
+    style I fill:#3d85c6,stroke:#f3f3f3,stroke-width:1px;
+    style L fill:#3d85c6,stroke:#f3f3f3,stroke-width:1px;
+```
+
+```mermaid
+graph RL
+    A[commit A<br>bby78a3]
+    B[commit B<br>zu2hr4a]
+    C[commit C<br>qw3v5o0]
+    D[commit D<br>lo2tu2m]
+    E[commit E<br>9mqe56z]
+    G[commit G<br>9mqe56z]
+    I((main <br> <small>default branch<small/>))
+    H((HEAD))
+    L((new-test-branch))
+    G1[/index.html<br><small>part-of-commit<small/>/]
+    G2[/index.css<br><small>part-of-commit<small/>/]
+
+    B -.-> A
+    C -.-> B
+    D -.-> C
+    E --> D
+    I --> E
+    H -.-> L
+    L --> G
+    G -.-> E
+
+    subgraph Commit G
+    G1 <-.-> G
+    G2 <-.-> G
+    end
+
+    style H fill:#00703c,stroke:#f3f3f3,stroke-width:4px;
+    style G fill:#ac2643,stroke:#d5e4f7,stroke-width:4px;
+    style E fill:#ac2643,stroke:#d5e4f7,stroke-width:4px;
+    style D fill:#ac2643,stroke:#d5e4f7,stroke-width:4px;
+    style C fill:#ac2643,stroke:#f3f3f3,stroke-width:1px;
+    style B fill:#ac2643,stroke:#f3f3f3,stroke-width:1px;
+    style A fill:#ac2643,stroke:#f3f3f3,stroke-width:1px;
+    style I fill:#3d85c6,stroke:#f3f3f3,stroke-width:1px;
+    style L fill:#3d85c6,stroke:#f3f3f3,stroke-width:1px;
+```
+
+```bash
+# Commiting changes to the current branch
+git checkout new-test-branch
+git commit -m "Before Ammend"
+git log
+```
+![Git Log - Before Amend](./images/git-log-before-amend.png)
+
+
+```bash
+# Amending the last commit of the current branch
+git commit --amend # populate the editor with the last commit message
+git log
+```
+![Git Log - After Amend](./images/git-log-after-amend.png)
+
+
+
+
+
+
+
 
 
 
