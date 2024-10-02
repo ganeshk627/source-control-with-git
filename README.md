@@ -1242,8 +1242,10 @@ project-root/
 ```
 
 ## Ways to find out the brach name
+```bash
 git log
 git status
 git branch -vv
 git branch
 git branch -a
+```
